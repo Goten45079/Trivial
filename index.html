@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM Lens | API Observability</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main>
+      <aside>
+        <div class="brand">⚡ <span>LLM Lens</span></div>
+        <a class="active" href="#analytics">Analytics</a>
+        <a href="#budgets">Budgets</a>
+        <a href="#call-logs">Call Logs</a>
+        <a href="#ai-optimizer">AI Optimizer</a>
+      </aside>
+      <section class="content">
+        <header>
+          <div><p class="eyebrow">Full-stack observability</p><h1>LLM API Observability & Cost Tracking</h1></div>
+          <button>✨ Export report</button>
+        </header>
+        <section class="filters" id="analytics">🔎 <select id="modelFilter"></select><select id="envFilter"></select></section>
+        <section class="cards" id="metrics"></section>
+        <section class="grid two"><section class="panel"><h2>📈 Usage, cost, and latency over time</h2><div class="chart" id="chart"></div></section><section class="panel"><h2>🎛️ Model mix and health</h2><div id="modelMix"></div><div class="health" id="health"></div></section></section>
+        <section class="grid two" id="budgets"><section class="panel"><h2>⚙️ Budget and alert configuration</h2><div id="budgetFields"></div></section><section class="panel"><h2>🚨 Active alert status</h2><div id="alerts"></div></section></section>
+        <section class="panel" id="call-logs"><h2>🛰️ Detailed API call logs</h2><div class="tableWrap"><table><thead><tr><th>Request</th><th>Time</th><th>Model</th><th>Env</th><th>Tokens</th><th>Cost</th><th>Latency</th><th>Status</th></tr></thead><tbody id="logs"></tbody></table></div></section>
+        <section class="panel" id="ai-optimizer"><h2>🤖 AI optimization panel</h2><div class="suggestions" id="suggestions"></div></section>
+      </section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

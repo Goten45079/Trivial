@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-lens
+  labels:
+    app: llm-lens
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-lens
+  template:
+    metadata:
+      labels:
+        app: llm-lens
+    spec:
+      containers:
+        - name: llm-lens
+          image: ghcr.io/your-org/llm-lens:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_ENV
+              value: production
+            - name: DATABASE_PATH
+              value: /app/data/llm_lens.db
+            - name: CORS_ORIGINS
+              value: https://llm-lens.example.com
+            - name: LLM_LENS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: llm-lens-secrets
+                  key: LLM_LENS_API_KEY
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: data
+          emptyDir: {}
