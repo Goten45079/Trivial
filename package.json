@@ -1,1 +1,1 @@
-{"scripts":{"build":"node scripts/validate.mjs","dev":"uvicorn app.main:app --reload --host 0.0.0.0 --port 8000","preview":"uvicorn app.main:app --host 0.0.0.0 --port 8000"},"devDependencies":{}}
+{"scripts":{"build":"node scripts/validate.mjs","dev":"python3 -m http.server 5173","preview":"python3 -m http.server 4173"},"devDependencies":{}}
